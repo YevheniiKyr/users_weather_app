@@ -1,0 +1,36 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 20px;
+}
+
+.user-card {
+  max-width: 100%;
+}
+
+.user-image {
+  border-radius: 50% !important;
+  max-width: 35px;
+  max-height: 35px;
+}
+
+.card-header-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+  mat-card-title,
+  mat-card-subtitle {
+    width: 100%;
+  }
+}
+
+
+
+
+
+
+

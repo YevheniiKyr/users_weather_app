@@ -5,6 +5,6 @@ import {UserWeatherComponent} from "./pages/user-weather/user-weather.component"
 export const routes: Routes = [
   { path: '', redirectTo: 'users', pathMatch: 'full' },
   { path: 'users', component: UsersComponent },
-  { path: 'users/:id/weather', component: UserWeatherComponent },
+  { path: 'users/weather', component: UserWeatherComponent },
 ];
 
