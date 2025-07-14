@@ -1,16 +1,47 @@
 .weather-card {
   max-width: 50%;
-  margin: 20px auto;
+  margin: 1.5rem auto;
 }
 
 .title-and-icon {
-  padding: 16px;
+  padding: 1rem;
   display: flex;
-  gap: 10px;
+  gap: 0.7rem;
   flex-direction: row;
   align-items: center;
+  font-size: 1.2rem;
 }
 
+.toolbar {
+  text-align: center !important;
+  display: flex;
+  justify-content: center;
+}
+
+.info {
+  font-size: 1rem;
+}
+
+.header {
+  font-size: 1.5rem;
+}
+@media (max-width: 768px) {
+  .weather-card {
+    max-width: 70%;
+  }
+}
+
+@media (max-width: 576px) {
+  .weather-card {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 400px) {
+  .weather-card {
+    max-width: 90%;
+  }
+}
 
 
 

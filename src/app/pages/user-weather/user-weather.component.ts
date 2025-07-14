@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {MatToolbar} from "@angular/material/toolbar";
-import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {MatCard, MatCardContent, MatCardTitle} from "@angular/material/card";
-import {NgIf} from "@angular/common";
 import {WeatherService} from "../../services/weather-service/weather.service";
 import {MatIcon} from "@angular/material/icon";
 import {WeatherResponse} from "../../models/weather.model";
+import {take} from "rxjs";
+import {SpinnerComponent} from "../../components/spinner/spinner.component";
+import {IconInfo} from "../../models/icon-info.model";
+import {ICON_HELP} from "../../consts/icons";
 
 @Component({
   selector: 'app-user-weather',
@@ -14,12 +16,11 @@ import {WeatherResponse} from "../../models/weather.model";
   standalone: true,
   imports: [
     MatToolbar,
-    MatProgressSpinner,
     MatCard,
     MatCardTitle,
     MatCardContent,
-    NgIf,
-    MatIcon
+    MatIcon,
+    SpinnerComponent
   ],
   styleUrls: ['./user-weather.component.scss']
 })
@@ -27,7 +28,9 @@ export class UserWeatherComponent implements OnInit {
   name: string = '';
   weatherData: WeatherResponse | null = null;
   isLoading: boolean = true;
-
+  label: string = '';
+  icon: string = '';
+  isSvg: boolean = false;
   constructor(private route: ActivatedRoute, private weatherService: WeatherService) {}
 
   ngOnInit(): void {
@@ -36,24 +39,27 @@ export class UserWeatherComponent implements OnInit {
     const lon: string = queryParams['lon'];
     this.name = queryParams['name'];
 
-
-    this.weatherService.getWeather(lat, lon).subscribe({
+    this.weatherService.getWeather(lat, lon).pipe(
+      take(1)
+    ).subscribe({
       next: (res: WeatherResponse): void => {
         this.weatherData = res;
         this.isLoading = false;
+        const weatherCode: number = this.weatherData.current_weather.weathercode
+        const iconInfo: IconInfo | null = this.weatherService.getWeatherIconInfo(weatherCode);
+        if(!iconInfo){
+          this.icon = ICON_HELP;
+          this.label = "Unknown"
+        } else {
+          this.icon = iconInfo.icon;
+          this.label = iconInfo.label;
+          this.isSvg = iconInfo.isSvg ?? false;
+        }
       },
-      error: (err): void => {
-        console.error(err);
+      error: (err: Error): void => {
         this.isLoading = false;
       }
     });
   }
 
-  getLabel(code: number): string {
-    return this.weatherService.getWeatherLabel(code);
-  }
-
-  getIcon(code: number): string {
-    return this.weatherService.getWeatherIcon(code);
-  }
 }

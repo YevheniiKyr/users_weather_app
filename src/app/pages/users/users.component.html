@@ -1,26 +1,33 @@
-<div class="container">
-  <mat-toolbar color="primary">User List</mat-toolbar>
-
-  <div *ngIf="isLoading" class="spinner-container">
-    <mat-progress-spinner mode="indeterminate" diameter="50"></mat-progress-spinner>
-  </div>
-
-  <div class="grid" *ngIf="!isLoading">
-    <mat-card class="user-card" *ngFor="let user of users; let i = index">
-      <img class="user-image" mat-card-image [ngSrc]="user.picture.thumbnail" alt="User photo" fill/>
-      <mat-card-header class="card-header-centered">
-        <mat-card-title class="title">
+<div>
+  <h1 class="header">Users List</h1>
+  @if(isLoading) {
+    <app-spinner/>
+  } @else if(users.length) {
+    <div class="grid">
+    @for (user of users; track user.email){
+      <mat-card class="user-card">
+        <img class="user-image" mat-card-image [ngSrc]="user.picture.thumbnail" alt="User photo" fill/>
+        <mat-card-header class="card-header-centered">
+          <mat-card-title class="title">
             {{user.name.title}} {{user.name.first}} {{user.name.last}}
-        </mat-card-title>
-        <mat-card-subtitle>{{ user.gender | titlecase }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <p>Location: {{user.location.city}}, {{user.location.country}}</p>
-        <p>Email: {{user.email}}</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="accent" (click)="viewWeather(user)">View Weather</button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+          </mat-card-title>
+          <mat-card-subtitle>{{ user.gender | titlecase }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="info">Location: {{user.location.city}}, {{user.location.country}}</p>
+          <p class="info">Email: {{user.email}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="accent" (click)="viewWeather(user)">View Weather</button>
+        </mat-card-actions>
+      </mat-card>
+    }
+    </div>
+  }
+  @else {
+    <div class="no-data">
+      <h1>Users not found</h1>
+    </div>
+  }
 </div>
+

@@ -1,15 +1,26 @@
-<div *ngIf="isLoading" class="spinner-container">
-  <mat-progress-spinner mode="indeterminate" diameter="50"></mat-progress-spinner>
-</div>
-<mat-card *ngIf="!isLoading && weatherData" class="weather-card">
-  <mat-toolbar color="primary">Weather for {{ name }}</mat-toolbar>
-  <mat-card-title class="title-and-icon">
-      <mat-icon>{{ getIcon(weatherData.current_weather.weathercode) }}</mat-icon>
-      {{ getLabel(weatherData.current_weather.weathercode) }}
-  </mat-card-title>
-  <mat-card-content>
-    <p>Current temperature: {{ weatherData.current_weather.temperature }}°C</p>
-    <p>Min today: {{ weatherData.daily.temperature_2m_min[0] }}°C</p>
-    <p>Max today: {{ weatherData.daily.temperature_2m_max[0] }}°C</p>
-  </mat-card-content>
-</mat-card>
+@if (isLoading) {
+  <app-spinner/>
+} @else if (weatherData) {
+  <mat-card class="weather-card">
+    <mat-toolbar class="toolbar" color="primary">
+      <h1 class="header">Weather for <br> {{ name }}</h1>
+    </mat-toolbar>
+    <mat-card-title class="title-and-icon">
+      @if (isSvg) {
+        <mat-icon [svgIcon]="icon"></mat-icon>
+      } @else {
+        <mat-icon>{{icon}}</mat-icon>
+      }
+      {{ label }}, {{ weatherData.current_weather.temperature }}°C
+    </mat-card-title>
+    <mat-card-content>
+      <p class="info">Min today: {{ weatherData.daily.temperature_2m_min[0] }}°C</p>
+      <p class="info">Max today: {{ weatherData.daily.temperature_2m_max[0] }}°C</p>
+    </mat-card-content>
+  </mat-card>
+} @else {
+  <div class="no-data">
+    <h1>No weather data for current user</h1>
+  </div>
+}
+

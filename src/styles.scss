@@ -1,12 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-.spinner-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
+html, body {
+  height: 100%;
 }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+root {
+  box-sizing: border-box;
+}
+
+.no-data {
+  padding: 1.2rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+@media (max-width: 575px) {
+  html {
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1200px) {
+  html {
+    font-size: 14px;
+  }
+}
+
 
 

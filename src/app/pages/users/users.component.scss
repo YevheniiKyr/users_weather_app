@@ -1,18 +1,19 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-  margin: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.2rem;
+  margin: 1.5rem;
 }
 
 .user-card {
   max-width: 100%;
+  padding: 8px;
 }
 
 .user-image {
   border-radius: 50% !important;
-  max-width: 35px;
-  max-height: 35px;
+  max-width: 2.5rem;
+  max-height: 2.5rem;
 }
 
 .card-header-centered {
@@ -21,15 +22,27 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 30px;
+  padding: 2.2rem;
+
   mat-card-title,
   mat-card-subtitle {
     width: 100%;
   }
 }
 
+.header {
+  text-align: center;
+  padding: 1.2rem 0;
+  font-size: 2rem;
+}
 
+.info {
+  font-size: 1rem;
+}
 
+.title {
+  font-size: 1.5rem;
+}
 
 
 

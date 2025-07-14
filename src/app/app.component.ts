@@ -4,7 +4,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {provideHttpClient} from "@angular/common/http";
+import {NavbarComponent} from "./components/navbar/navbar.component";
+import {ConfigService} from "./services/config.service";
 
 @Component({
   selector: 'app-root',
@@ -15,10 +16,15 @@ import {provideHttpClient} from "@angular/common/http";
     MatCardModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    NavbarComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'weather-users-app';
+
+  constructor(configService: ConfigService) {
+    configService.config();
+  }
 }
