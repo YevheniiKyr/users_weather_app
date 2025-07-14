@@ -7,7 +7,7 @@ import {Icon} from "../models/icon.model";
 @Injectable({
   providedIn: 'root'
 })
-export class ConfigService {
+export class MatIconsConfigService {
   private matIconRegistry = inject(MatIconRegistry);
   private sanitizer = inject(DomSanitizer);
   private icons: Icon[] = [

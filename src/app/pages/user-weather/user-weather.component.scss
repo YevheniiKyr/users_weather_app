@@ -24,7 +24,9 @@
 
 .header {
   font-size: 1.5rem;
+  line-height: 1.2;
 }
+
 @media (max-width: 768px) {
   .weather-card {
     max-width: 70%;
